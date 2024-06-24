@@ -1,2 +1,3 @@
 # fullstack3
-Fullstack open part 3 practice
+Link to app:
+https://fullstack3-y0ok.onrender.com/api/persons
