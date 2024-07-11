@@ -1,0 +1,7 @@
+PUT https://fullstack3-y0ok.onrender.com/api/persons/668e8b3d077a993e0cb352a3
+Content-Type: application/json
+
+{
+    "name": "a",
+    "number": "2"
+}

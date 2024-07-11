@@ -35,10 +35,14 @@ app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
 })
 
-app.get('/info', (request, response) => {
-    response.send(`<p>Phonebook has info for
-         ${Person.find({}).length} people</p>
+app.get('/info', (request, response, next) => {
+    Person.find({})
+        .then(persons => {
+            response.send(`<p>Phonebook has info for
+         ${persons.length} people</p>
          <p> ${new Date()} </p>`)
+        })
+        .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
@@ -78,7 +82,7 @@ app.post('/api/persons', (request, response) => {
     })
 })
 
-app.put('api/persons/:id'), (request, response, next) => {
+app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
 
     const person = {
@@ -91,7 +95,9 @@ app.put('api/persons/:id'), (request, response, next) => {
             response.json(updatedPerson)
         })
         .catch(error => next(error))
-}
+})
+
+
 
 app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndDelete(request.params.id)
