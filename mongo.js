@@ -21,29 +21,29 @@ const contactSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', contactSchema)
 
 const printPeople = () => {
-    console.log("phonebook:")
-    return Person.find({})
+  console.log('phonebook:')
+  return Person.find({})
     .then(result => {
-        result.forEach(person => {
-            console.log(`${person.name} ${person.number}`)
-        })
-        mongoose.connection.close()
-        })
+      result.forEach(person => {
+        console.log(`${person.name} ${person.number}`)
+      })
+      mongoose.connection.close()
+    })
 }
 
 if (process.argv.length<4) {
-    printPeople()
+  printPeople()
     .then(() => {process.exit(0)})
 } else {
-    const person = new Person({
+  const person = new Person({
     name: process.argv[3],
     number: process.argv[4]
-    })
-    
-    person.save().then(result => {
+  })
+
+  person.save().then(() => {
     console.log('person saved!')
     mongoose.connection.close()
-    })
+  })
 }
 
 
